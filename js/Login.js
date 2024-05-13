@@ -3,7 +3,6 @@ const form = document.getElementById("form");
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  const nome = document.getElementById("nome");
   const email = document.getElementById("email");
   const password = document.getElementById("password");
 
@@ -12,20 +11,22 @@ form.addEventListener("submit", (e) => {
   //     console.log(item);
   //   });
 
-  // Trasformar os dados em JSON
-  const userDataSignUp = JSON.stringify({
-    name: nome.value,
+  const userDataSignIn = JSON.stringify({
     email: email.value,
     password: password.value,
   });
 
-  // Enviar para o server!! FETCH (POST) - Cadastro.
-  fetch("http://10.92.198.38:8080/auth/signup", {
+  // Login
+  fetch("http://10.92.198.38:8080/auth/signin", {
     method: "Post",
-    body: userDataSignUp,
+    body: userDataSignIn,
     headers: { "Content-type": "application/json; charset=utf-8" },
   })
     .then((result) => result.json())
-    .then((data) => console.log(data))
+    .then((data) => {
+      if (data.token) {
+        alert("Token ativado com sucesso! [LOGADO]");
+      }
+    })
     .then((err) => console.log(err));
 });
