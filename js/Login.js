@@ -25,7 +25,10 @@ form.addEventListener("submit", (e) => {
     .then((result) => result.json())
     .then((data) => {
       if (data.token) {
-        alert("Token ativado com sucesso! [LOGADO]");
+        alert(
+          `Token ativado com sucesso! [LOGADO] - Seu token é: ${data.token}`
+        );
+        console.log(data);
       }
     })
     .then((err) => console.log(err));
